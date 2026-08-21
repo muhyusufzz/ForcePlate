@@ -1,0 +1,111 @@
+
+Rancangan force plate
+- kedua plate terhubung 1 mikrokontroller Nodemcu Dual-core 240 MHz
+- Menggunakan top plate dan bot plate, keduanya berukuran sama (tebal nya saja yang berbeda) 
+- 4 load cell pada masing masing plate  (total 8 loadcell masing masing)
+- dimensi 225 x 400 x 8 mm (Top PLATE)
+- dimensi 225 x 400 x 12 mm (Bot PLATE)
+- BAHAN Top Plate dan Bot Plate baja (steel)
+- Pengukuran kondisi berdiri diam dan Counter Movement Jump (CMJ)
+- Beban max subjek 100kg
+- Loadcell 180kg 
+- gaya max 4905N
+- modul adc ads1220 4 buah
+- Loadcell 180kg 8 buah
+- dapat mengukur Ground Reaction Force (GRF) dan Center of Pressure (CoP) Anterior Posterior
+- Code cpp digunakan untuk algoritma akuisisi data loadcell yang kemudian dikirim ke mikrokontroller esp32 nodemecu 32s
+- code python digunakan untuk komputasi parameter dari data yang terakuisisi dan kemudian dicari parameter penting untuk force plate terutama GRF dan CoP
+- simulasi plate dilakukan untuk pengecekan kekuatan mekanik menggunakan software ansys dengan memberi gaya 4905N
+- design plate 3d dan 2d dilakukan di autocad
+
+
+Program:
+firmware cpp utk  program hardware pada nodemcu
+processing.py uutk pengolahan sinyal dari nodemcu
+cmj.py utk program komputasi Gerakan cmj
+standing.py utk program komputasi Gerakan berdiri diam/quiet standing
+
+Mekanikal
+- Terdapat 2 plate untuk kaki kanan dan kiri yang berukuran sama
+- Tiap kaki menggunakan top plate dan bot plate, dimensi sama (tebal nya saja yang berbeda)
+- dimensi 225 x 400 x 8 mm (Top PLATE)
+- dimensi 225 x 400 x 12 mm (Bot PLATE)
+- BAHAN Top Plate dan Bot Plate baja (steel)
+
+Eletrikal
+- 4 loadcell yang masing masing 180kg pada tiap plate
+- 2 modul adc ADS1220 24bit untuk tiap plate
+- 1 esp32 nodemcu 
+
+SPESIFIKASI 
+LOADCELL
+Loadcell Capasitas 180Kg 
+Specification:
+Rated Capacity: 180kg
+Accuracy Class: C3
+Rated Output: 2.00.2mv/v
+Non-linearity: 0.02% F.S
+Creep(30min): 0.0016% F.S
+Safe overload: 150%F.S
+Destructive Load: 200%F.S
+Excitation Recommended: 4~12VDC, Max:15vDC
+Cable Length: 110 cm
+4-wire with shield
+IP67 Rating
+Construction: aluminum alloy
+Dimensions: 147 x 30 x 22 mm
+Pemasangan urutan warna kabel loadcell
+ warna HlTAM   = E-
+ warna PUTIH   = S-
+ warna MERAH = E+
+warna HIJAU   = S+
+
+KONFIGURASI LOADCELL PADA PLATE
+              225mm
+   ┌───────────────────┐
+
+    │ LC1          LC3     │
+
+    │                      │      400mm
+
+    │                      │
+
+    │ LC2          LC4     │
+
+   └───────────────────┘ 
+kaki kiri                      
+LC1 dan LC3 terhubung ke Modul ADS1220#1 -> membaca kaki kiri depan
+LC2 dan LC4 terhubung ke Modul ADS1220#2 -> membaca kaki kiri belakang
+
+kaki kanan                      
+LC1 dan LC3 terhubung ke Modul ADS1220#3 -> membaca kaki kanan depan
+LC2 dan LC4 terhubung ke Modul ADS1220#4 -> membaca kaki kanan depan
+
+
+ADS1220 24-bit - Konverter Analog ke Digital Presisi Tinggi ADC Modul SPI low-power 24 bit analog-to-digital converter
+Tingkatkan akurasi sistem pengukuran Anda dengan Modul ADC ADS1220 24-bit!
+Presisi 24-bit Ultra Tinggi: Menawarkan hingga 20 bit resolusi efektif (ENOB) yang bersih, jauh melampaui ADC bawaan mikrokontroler, untuk pengukuran yang stabil dan bebas noise.
+FITUR UTAMA MODUL INI
+Tingkatkan akurasi sistem pengukuran Anda dengan Modul ADC ADS1220 24-bit. Modul ini adalah solusi lengkap untuk membaca sinyal analog yang sangat halus dari berbagai sensor industri seperti load cell (timbangan), sensor suhu PT100, termokopel, dan sensor jembatan. Dilengkapi dengan Penguat PGA, sumber arus eksitasi, dan referensi voltase internal yang stabil, modul ini siap untuk pengukuran presisi tertinggi.
+ALL-IN-ONE UNTUK SENSOR INDUSTRI: Sudah terintegrasi PGA (gain hingga 128x), 2 sumber arus eksitasi terprogram, dan referensi internal 2.048V, sehingga sangat menyederhanakan desain sistem.
+HEMAT DAYA DAN TANGGUH: Konsumsi daya sangat rendah (120mA khas), mendukung daya 3V-5V, dan dapat beroperasi pada rentang suhu -25C hingga 85C, cocok untuk perangkat portabel dan industri.
+PERFORMANCE STABIL: Menggunakan komponen kualitas tinggi dengan osilator internal presisi dan sensor suhu internal (akurasi 0.5C), menjamin keandalan jangka panjang.
+MUDAH DIGUNAKAN: Meski powerful, antarmuka SPI yang standar membuatnya mudah dihubungkan dengan Arduino, ESP32, STM32, atau Raspberry Pi.
+SPESIFIKASI TEKNIS DETAIL
+Chip ADC Utama: ADS1220 (24-bit, dari Texas Instruments)
+Antarmuka Komunikasi: SPI (Mode 1)
+Tegangan Operasi: DC 3.0V - 5.5V
+Konsumsi Daya: Serendah 120 mA (Duty-Cycle Mode)
+Resolusi Efektif: Hingga 20 bit (ENOB)
+Konfigurasi Input: 2 input diferensial atau 4 input single-ended
+Penguat (PGA): Terprogram, Gain 1 - 128x (untuk sinyal sangat lemah)
+Sumber Arus (IDAC): 2 sumber, terprogram 10mA - 1.5mA (untuk sensor PT100)
+Referensi Voltase: Internal 2.048V (Drift rendah: 5 ppm/C)
+Sensor Suhu Internal: Ada, akurasi tipikal 0.5C
+Dimensi Modul: 22 mm x 21 mm (kompak)
+Rentang Suhu Kerja: -25C sampai +85C
+Level Logika: Modul ini biasanya beroperasi pada level logika 3.3V. Pastikan mikrokontroler Anda (seperti ESP32 atau Arduino 3.3V) kompatibel. Jika menggunakan Arduino 5V, Anda mungkin memerlukan konverter level logika untuk pin SCLK, MOSI, dan CS.
+
+
+
+
